@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>淫书生</title>
+<style>
+  :root {
+    --st-bg: #f7f4ef;
+    --st-paper: #faf8f3;
+    --st-border: #e0d8cb;
+    --st-border-strong: rgba(0, 0, 0, 0.1);
+    --st-text-main: #2c2418;
+    --st-text-muted: #7a6e5e;
+    --st-accent: #8b3a3a;
+    --st-accent-soft: rgba(139, 58, 58, 0.1);
+    --st-tape: rgba(220, 210, 190, 0.85);
+    --st-danger: #a03030;
+    --st-danger-bg: rgba(160, 48, 48, 0.06);
+    --st-shadow: 0 8px 30px rgba(30, 20, 10, 0.1);
+    --font-serif: "Songti SC", "Noto Serif CJK SC", "STSong", "Hiragino Mincho", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif;
+    --font-hand: "Kaiti SC", "STKaiti", "KaiTi", cursive;
+    --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    color: var(--st-text-main);
+    font-family: var(--font-sans);
+    background: transparent;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .notebook {
+    width: 100%;
+    max-width: 680px;
+    background: var(--st-paper);
+    border-radius: 8px;
+    box-shadow: var(--st-shadow);
+    position: relative;
+    padding: clamp(24px, 5vw, 48px);
+    border: 1px solid var(--st-border);
+  }
+  .brand-stamp {
+    display: inline-block;
+    padding: 4px 14px;
+    border: 1px solid var(--st-accent);
+    color: var(--st-accent);
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    border-radius: 2px;
+    transform: rotate(-1deg);
+    margin-bottom: 24px;
+    opacity: 0.75;
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 6vw, 42px);
+    line-height: 1.35;
+    color: var(--st-text-main);
+    margin-bottom: 16px;
+  }
+  .hero-title .accent {
+    color: var(--st-accent);
+    position: relative;
+    display: inline-block;
+  }
+  .hero-title .accent::after {
+    content: "";
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 6px;
+    background: var(--st-accent-soft);
+    z-index: -1;
+  }
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--st-text-muted);
+    line-height: 1.9;
+  }
+  .tag-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .tag-strip span {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--st-border);
+    border-radius: 20px;
+    color: var(--st-text-muted);
+  }
+  .tag-strip .tag-accent {
+    background: var(--st-accent-soft);
+    border-color: rgba(139, 58, 58, 0.3);
+    color: var(--st-accent);
+  }
+  .divider {
+    border: none;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--st-border), var(--st-border) 4px, transparent 4px, transparent 8px);
+    margin: 32px 0;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--st-text-main);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::before {
+    content: "\25C7";
+    color: var(--st-accent);
+    font-size: 0.8rem;
+  }
+  .intro-text {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--st-text-main);
+    background: rgba(0,0,0,0.015);
+    padding: 16px 20px;
+    border-radius: 4px;
+    border-left: 3px solid var(--st-accent);
+    font-family: var(--font-serif);
+  }
+  .char-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .char-card {
+    padding: 16px;
+    border: 1px solid var(--st-border);
+    border-radius: 6px;
+    background: #fff;
+    position: relative;
+  }
+  .char-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 6px 6px 0 0;
+    background: var(--st-border);
+  }
+  .char-card.accent-card::before {
+    background: var(--st-accent);
+  }
+  .char-name {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--st-text-main);
+    margin-bottom: 2px;
+  }
+  .char-role {
+    font-size: 0.7rem;
+    color: var(--st-text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .char-traits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .char-traits li {
+    font-size: 0.8rem;
+    color: var(--st-text-main);
+    line-height: 1.7;
+    padding-left: 14px;
+    position: relative;
+  }
+  .char-traits li::before {
+    content: "\00B7";
+    position: absolute;
+    left: 2px;
+    color: var(--st-text-muted);
+    font-weight: bold;
+  }
+  .char-card.accent-card .char-traits li::before {
+    color: var(--st-accent);
+  }
+  .char-tension {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--st-border);
+    font-size: 0.75rem;
+    color: var(--st-text-muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .char-card.accent-card .char-tension {
+    color: var(--st-accent);
+    border-top-color: rgba(139, 58, 58, 0.25);
+  }
+  .opening-list {
+    display: grid;
+    gap: 16px;
+  }
+  .opening-card {
+    position: relative;
+    padding: 20px 20px 20px 20px;
+    background: #fff;
+    border: 1px solid var(--st-border);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .opening-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--st-accent);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    pointer-events: none;
+  }
+  .opening-card:hover {
+    transform: translateY(-4px) scale(1.01) rotate(0.5deg);
+    box-shadow: 0 8px 24px rgba(139, 58, 58, 0.12);
+    border-color: var(--st-accent);
+    z-index: 10;
+  }
+  .opening-card:hover::after {
+    opacity: 0.03;
+  }
+  .opening-card:active {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition-duration: 0.1s;
+  }
+  .opening-card:active::after {
+    opacity: 0.08;
+    transition-duration: 0.1s;
+  }
+  .tape {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+    width: 60px;
+    height: 18px;
+    background: var(--st-tape);
+    backdrop-filter: blur(4px);
+    border-left: 2px dashed rgba(0,0,0,0.05);
+    border-right: 2px dashed rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    z-index: 2;
+  }
+  .opening-card.tilted-right { transform: rotate(0.5deg); }
+  .opening-card.tilted-left { transform: rotate(-0.5deg); }
+  .opening-card.tilted-right .tape { transform: translateX(-50%) rotate(1.5deg); }
+  .opening-card.tilted-left .tape { transform: translateX(-50%) rotate(-1.5deg); }
+  .opening-title {
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    color: var(--st-text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .opening-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--st-accent-soft);
+    border-radius: 50%;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--st-accent);
+    font-weight: bold;
+  }
+  .opening-desc {
+    font-size: 0.85rem;
+    color: var(--st-text-muted);
+    line-height: 1.7;
+  }
+  .opening-tag {
+    font-size: 0.75rem;
+    color: var(--st-accent);
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .notice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .notice-card {
+    padding: 16px;
+    border: 1px dashed var(--st-border);
+    border-radius: 4px;
+  }
+  .notice-title {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--st-text-main);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .notice-title::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background: var(--st-border-strong);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-family: var(--font-sans);
+  }
+  .notice-title.warning::before {
+    background: var(--st-danger);
+    color: #fff;
+  }
+  .notice-card.warning-card {
+    background: var(--st-danger-bg);
+    border-color: rgba(160, 48, 48, 0.3);
+  }
+  .notice-content {
+    font-size: 0.8rem;
+    color: var(--st-text-muted);
+    line-height: 1.7;
+  }
+  .notice-card.warning-card .notice-content {
+    color: #7a2a2a;
+  }
+  .notice-content li {
+    margin-left: 1.2em;
+    margin-bottom: 4px;
+  }
+  .footer-stamp {
+    margin-top: 40px;
+    text-align: center;
+    font-family: var(--font-hand);
+    font-size: 1.2rem;
+    color: var(--st-accent);
+    opacity: 0.6;
+    transform: rotate(-2deg);
+  }
+  .footer-info {
+    margin-top: 48px;
+    padding: 24px 20px 20px;
+    background: rgba(0,0,0,0.018);
+    border: 1px solid var(--st-border);
+    border-radius: 6px;
+    position: relative;
+  }
+  .footer-info::before {
+    content: "\25C7";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--st-paper);
+    padding: 0 8px;
+    color: var(--st-accent);
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+  .author-section {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--st-border);
+  }
+  .author-label {
+    font-size: 0.65rem;
+    color: var(--st-text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .author-name {
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    color: var(--st-text-main);
+    position: relative;
+    display: inline-block;
+  }
+  .author-name::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 3px;
+    background: var(--st-accent-soft);
+    border-radius: 2px;
+  }
+  .discord-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .discord-section-label {
+    font-size: 0.65rem;
+    color: var(--st-text-muted);
+    letter-spacing: 0.12em;
+  }
+  .discord-link {
+    color: #5865F2;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 28px;
+    border-radius: 4px;
+    background: rgba(88, 101, 242, 0.06);
+    border: 1px solid rgba(88, 101, 242, 0.18);
+    transition: all 0.25s var(--ease);
+    cursor: pointer;
+  }
+  .discord-link:hover {
+    background: #5865F2;
+    color: white;
+    border-color: #5865F2;
+    box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
+    transform: translateY(-1px);
+  }
+  .discord-link:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.2);
+  }
+  .discord-hint {
+    font-size: 0.72rem;
+    color: var(--st-text-muted);
+    text-align: center;
+    max-width: 85%;
+    line-height: 1.6;
+  }
+  .poem-quote {
+    font-family: var(--font-hand);
+    font-size: 0.9rem;
+    color: var(--st-text-muted);
+    line-height: 2;
+    text-align: center;
+    padding: 16px 20px;
+    border: 1px dashed var(--st-border);
+    border-radius: 4px;
+    margin-top: 20px;
+    background: rgba(139, 58, 58, 0.02);
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-content {
+    background: var(--st-paper);
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--st-border);
+    transform: translateY(20px);
+    transition: transform 0.2s var(--ease);
+  }
+  .modal-overlay.show .modal-content {
+    transform: translateY(0);
+  }
+  .modal-title {
+    font-size: 1.1rem;
+    color: var(--st-text-main);
+    margin-bottom: 12px;
+    font-family: var(--font-serif);
+  }
+  .modal-text {
+    font-size: 0.9rem;
+    color: var(--st-text-muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .discord-url {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: rgba(88, 101, 242, 0.05);
+    color: #5865F2;
+    border-radius: 4px;
+    font-family: monospace;
+    word-break: break-all;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  .modal-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all 0.2s ease;
+    border: none;
+  }
+  .btn-cancel {
+    background: rgba(0,0,0,0.05);
+    color: var(--st-text-muted);
+  }
+  .btn-cancel:hover {
+    background: rgba(0,0,0,0.1);
+    color: var(--st-text-main);
+  }
+  .btn-confirm {
+    background: #5865F2;
+    color: white;
+  }
+  .btn-confirm:hover {
+    background: #4752C4;
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.3);
+  }
+  @media (max-width: 600px) {
+    .char-grid,
+    .notice-grid { grid-template-columns: 1fr; }
+    .notebook { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+  <main class="notebook">
+    <div class="brand-stamp">淫书生·卷</div>
+
+    <header>
+      <h1 class="hero-title"><span class="accent">深宅</span>之中<br>谁人不惹春</h1>
+      <p class="hero-subtitle">
+        穿越入赘婿之身，困于室内最底层。<br>
+        满园娇媛各怀心思，你亦有你的手段。
+      </p>
+
+      <div class="tag-strip">
+        <span class="tag-accent">宅斗权谋</span>
+        <span>古风情欲</span>
+        <span>禁忌关系</span>
+        <span>多女主</span>
+        <span>穿越逆袭</span>
+        <span>世情小说</span>
+      </div>
+    </header>
+
+    <hr class="divider">
+
+    <section class="notice-section" aria-label="注意事项">
+      <h2 class="section-title">附注信息</h2>
+      <div class="notice-grid">
+        <article class="notice-card">
+          <h4 class="notice-title">游玩提醒</h4>
+          <div class="notice-content">
+            <ul>
+              <li>本角色卡为虚构互动创作，请勿将角色行为等同于现实建议。</li>
+              <li>作品包含翁媳禁忌、宅斗权谋、显性情色描写等成人内容。</li>
+              <li>角色关系与权力格局会随互动推进而变化。</li>
+            </ul>
+          </div>
+        </article>
+        <article class="notice-card warning-card">
+          <h4 class="notice-title warning">版权与转载</h4>
+          <div class="notice-content">
+            <ul>
+              <li>这张角色卡是免费的，永远禁止商业化行为。如果你是购买获得，请立即退款并向购买平台举报死户口本的倒卖狗，维护创作者和您自身的权益。</li>
+              <li>未经作者明确授权，严禁将本作品转载至其他任何平台。</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section aria-label="故事入口">
+      <h2 class="section-title">故事入口</h2>
+      <div class="intro-text">
+        玄暄朝暮春，江南苏宁府清河县魏家荣园。你以穿越者之身入赘魏家，名为姑爷，实为家奴。正妻十余年未被临幸，宠妾野心勃勃，庶女寒微羞怯，嫡女冷傲不群——每个女人各怀心思，而你是唯一能用现代认知打破局面的人。
+      </div>
+
+      <div class="char-grid">
+        <div class="char-card accent-card">
+          <div class="char-name">李韵娘</div>
+          <div class="char-role">正妻 · 岳母 · 三十七岁</div>
+          <ul class="char-traits">
+            <li>十余年未被临幸，身体敏感到极点</li>
+            <li>温婉端庄，诗书世家出身</li>
+            <li>潜意识制造“意外”接触的自欺者</li>
+          </ul>
+          <div class="char-tension">最后一个承认真相的人，最先沉沦的身体</div>
+        </div>
+        <div class="char-card">
+          <div class="char-name">魏明鸢</div>
+          <div class="char-role">嫡女 · 名义妻子 · 十九岁</div>
+          <ul class="char-traits">
+            <li>冷艳才女，对婚姻漠然处之</li>
+            <li>未与你同房，指派通房丫鬟代行</li>
+            <li>无意识中关注频次正在上升</li>
+          </ul>
+          <div class="char-tension">从未被真正选择过的人，不知道自己在等什么</div>
+        </div>
+        <div class="char-card accent-card">
+          <div class="char-name">晴蔻</div>
+          <div class="char-role">宠妾 · 野心家 · 约二十三四岁</div>
+          <ul class="char-traits">
+            <li>与亲弟合谋渗透魏家图谋家产</li>
+            <li>明艳带侵略感，将所有人视为棋子</li>
+            <li>处子之身，视为最大筹码</li>
+          </ul>
+          <div class="char-tension">最柔软的称呼恰恰可能是最危险的时刻</div>
+        </div>
+        <div class="char-card">
+          <div class="char-name">素荷 / 魏婉莹 / 小翠</div>
+          <div class="char-role">通房丫鬟 · 私生女 · 狐假虎威</div>
+          <ul class="char-traits">
+            <li>素荷：十六岁，懵懂中分不清身体的余温</li>
+            <li>魏婉莹：十四岁，羞怯善良，渴望被善待</li>
+            <li>小翠：十七岁，晴蔻的耳目和打手</li>
+          </ul>
+          <div class="char-tension">荣园食物链上的每一环，都有各自的算计和软肋</div>
+        </div>
+      </div>
+
+      <div class="poem-quote">
+        纱窗日暖檀烟斜，一触酥胸似绽花。<br>
+        十载深闺人未识，春潮暗涌到天涯。
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section aria-label="翻开这一页">
+      <h2 class="section-title">翻开这一页</h2>
+      <div class="opening-list">
+        <article class="opening-card tilted-right" onclick="switchToOpening(1)" role="button" tabindex="0">
+          <div class="tape"></div>
+          <h3 class="opening-title"><span class="opening-num">1</span> 正院内室·暮春巧遇</h3>
+          <p class="opening-desc">暮春日头偏西，檀香细烟中岳母传你入内室叙话。一次意外的踉跌，你的手掌按上了她十余年未被人触碰的禁地。下一句话，将定义这桩“意外”的走向。</p>
+          <span class="opening-tag"># 岳母线 · 禁忌初触 · 暗流涌动</span>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="footer-info">
+      <div class="author-section">
+        <div class="author-label">作者</div>
+        <div class="author-name">执袂</div>
+      </div>
+      <div class="discord-section">
+        <div class="discord-section-label">交流社群</div>
+        <a href="javascript:void(0)" class="discord-link" id="discord-btn">加入 Discord 交流群</a>
+        <div class="discord-hint">发卡会有提醒，欢迎加入闲聊——SillyTavern相关，或者更多...</div>
+      </div>
+    </div>
+
+    <div class="footer-stamp">“纱窗春暖，欲海无涓。”</div>
+  </main>
+
+  <div id="discord-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3 class="modal-title">准备跳转至 Discord</h3>
+      <p class="modal-text">即将打开外部链接：<br><span class="discord-url">https://discord.gg/prism-airp</span></p>
+      <div class="modal-actions">
+        <button class="modal-btn btn-cancel" id="modal-cancel">取消</button>
+        <button class="modal-btn btn-confirm" id="modal-confirm">确认前往</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function() {
+  var discordUrl = 'https://discord.gg/prism-airp';
+  var modal = document.getElementById('discord-modal');
+  var btn = document.getElementById('discord-btn');
+  var cancelBtn = document.getElementById('modal-cancel');
+  var confirmBtn = document.getElementById('modal-confirm');
+
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    modal.classList.add('show');
+  });
+
+  cancelBtn.addEventListener('click', function() {
+    modal.classList.remove('show');
+  });
+
+  confirmBtn.addEventListener('click', function() {
+    window.open(discordUrl, '_blank');
+    modal.classList.remove('show');
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('show');
+    }
+  });
+
+  var openingCards = document.querySelectorAll('.opening-card[tabindex="0"]');
+  openingCards.forEach(function(card) {
+    card.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        card.click();
+      }
+    });
+  });
+})();
+
+async function switchToOpening(swipeId) {
+  var clickedCard = event && event.currentTarget;
+  if (clickedCard) {
+    clickedCard.style.opacity = '0.62';
+    clickedCard.style.pointerEvents = 'none';
+  }
+  try {
+    var messages = await getChatMessages('0', { include_swipe: true });
+    var targetSwipe = messages && messages[0] && messages[0].swipes && messages[0].swipes[swipeId];
+    if (!targetSwipe) {
+      throw new Error('\u672a\u627e\u5230\u5f00\u573a\u767d ' + swipeId + '\uff0c\u8bf7\u786e\u8ba4\u89d2\u8272\u5361\u5df2\u6b63\u786e\u914d\u7f6e\u3002');
+    }
+    await setChatMessage(targetSwipe, 0, {
+      swipe_id: swipeId,
+      refresh: 'display_and_render_current'
+    });
+  } catch (error) {
+    console.error('\u5207\u6362\u5f00\u573a\u767d\u5931\u8d25:', error);
+    alert(error && error.message ? error.message : '\u5207\u6362\u5f00\u573a\u767d\u5931\u8d25');
+    if (clickedCard) {
+      clickedCard.style.opacity = '1';
+      clickedCard.style.pointerEvents = 'auto';
+    }
+  }
+}
+</script>
+</body>
+</html>
