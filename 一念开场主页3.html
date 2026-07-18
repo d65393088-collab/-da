@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>一念 · 系统在线</title>
+<style>
+:root{--bg:#eef0f5;--ink:#1a1d24;--ink2:#3d4250;--ink3:#7a7f8e;--glass:rgba(255,255,255,0.5);--glass-b:rgba(255,255,255,0.85);--red:#c43e3e;--sve:#8a9bb0;--f:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;--fm:"JetBrains Mono",Consolas,monospace;--ez:cubic-bezier(.22,1,.36,1)}
+@keyframes glint{0%,100%{opacity:.85}50%{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{color:var(--ink);font-family:var(--f);background:linear-gradient(155deg,#f2f4f8 0%,#e2e6ee 50%,#d4dae4 100%);padding:clamp(16px,4vw,40px);overflow-x:hidden;position:relative}
+.sg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sg .f{position:absolute;border:1.5px solid rgba(255,255,255,0.95)}
+.sg .f:nth-child(1){top:-2%;left:-3%;width:35vw;height:28vh;clip-path:polygon(5% 0%,72% 3%,100% 45%,88% 100%,35% 92%,0% 55%);background:linear-gradient(150deg,rgba(255,255,255,0.85),rgba(210,218,230,0.5));box-shadow:6px 8px 20px rgba(120,135,160,0.25),inset 1px 1px 2px rgba(255,255,255,0.9)}
+.sg .f:nth-child(2){top:0;left:30%;width:40vw;height:32vh;clip-path:polygon(12% 0%,85% 5%,100% 38%,92% 88%,55% 100%,0% 72%,3% 25%);background:linear-gradient(200deg,rgba(200,208,222,0.55),rgba(230,236,244,0.35));box-shadow:-5px 7px 22px rgba(120,135,160,0.22),inset 1px 1px 2px rgba(255,255,255,0.85)}
+.sg .f:nth-child(3){top:-1%;right:-2%;width:32vw;height:35vh;clip-path:polygon(20% 0%,100% 0%,98% 60%,75% 100%,30% 85%,0% 42%);background:linear-gradient(130deg,rgba(255,255,255,0.8),rgba(205,213,226,0.45));box-shadow:5px 8px 20px rgba(120,135,160,0.24),inset -1px 1px 2px rgba(255,255,255,0.9)}
+.sg .f:nth-child(4){top:25%;left:-5%;width:30vw;height:30vh;clip-path:polygon(0% 10%,65% 0%,100% 35%,85% 85%,40% 100%,5% 70%);background:linear-gradient(180deg,rgba(190,200,215,0.5),rgba(225,231,240,0.35));box-shadow:6px 6px 18px rgba(120,135,160,0.2),inset 1px 1px 2px rgba(255,255,255,0.8)}
+.sg .f:nth-child(5){top:22%;left:25%;width:28vw;height:25vh;clip-path:polygon(15% 5%,90% 0%,100% 55%,70% 100%,10% 88%,0% 40%);background:linear-gradient(145deg,rgba(255,255,255,0.9),rgba(215,223,235,0.5));box-shadow:4px 8px 24px rgba(120,135,160,0.28),inset 1px 1px 3px rgba(255,255,255,0.95);animation:glint 8s ease-in-out infinite}
+.sg .f:nth-child(6){top:20%;right:0;width:35vw;height:28vh;clip-path:polygon(25% 0%,100% 12%,95% 70%,60% 100%,0% 80%,8% 30%);background:linear-gradient(220deg,rgba(255,255,255,0.75),rgba(200,208,222,0.4));box-shadow:-5px 7px 20px rgba(120,135,160,0.22),inset -1px 1px 2px rgba(255,255,255,0.85)}
+.sg .f:nth-child(7){top:48%;left:-2%;width:33vw;height:26vh;clip-path:polygon(0% 15%,55% 0%,100% 30%,90% 85%,45% 100%,5% 75%);background:linear-gradient(170deg,rgba(255,255,255,0.82),rgba(195,205,218,0.45));box-shadow:6px 7px 20px rgba(120,135,160,0.24),inset 1px 1px 2px rgba(255,255,255,0.9)}
+.sg .f:nth-child(8){top:45%;left:30%;width:25vw;height:22vh;clip-path:polygon(10% 0%,80% 8%,100% 50%,75% 100%,20% 90%,0% 45%);background:linear-gradient(155deg,rgba(255,255,255,0.92),rgba(220,228,238,0.5));box-shadow:4px 8px 22px rgba(120,135,160,0.28),inset 1px 1px 3px rgba(255,255,255,0.95);animation:glint 10s ease-in-out infinite;animation-delay:-3s}
+.sg .f:nth-child(9){top:50%;right:-3%;width:38vw;height:30vh;clip-path:polygon(18% 0%,100% 8%,95% 55%,70% 100%,15% 90%,0% 50%);background:linear-gradient(190deg,rgba(200,208,222,0.5),rgba(232,238,245,0.35));box-shadow:-5px 7px 20px rgba(120,135,160,0.22),inset -1px 1px 2px rgba(255,255,255,0.85)}
+.sg .f:nth-child(10){top:70%;left:-4%;width:36vw;height:32vh;clip-path:polygon(5% 5%,70% 0%,100% 40%,80% 95%,30% 100%,0% 60%);background:linear-gradient(140deg,rgba(255,255,255,0.78),rgba(198,206,220,0.42));box-shadow:6px 6px 18px rgba(120,135,160,0.2),inset 1px 1px 2px rgba(255,255,255,0.85)}
+.sg .f:nth-child(11){top:68%;left:32%;width:30vw;height:25vh;clip-path:polygon(20% 0%,88% 10%,100% 60%,65% 100%,5% 85%,0% 35%);background:linear-gradient(165deg,rgba(255,255,255,0.9),rgba(218,226,238,0.5));box-shadow:4px 8px 22px rgba(120,135,160,0.28),inset 1px 1px 3px rgba(255,255,255,0.95);animation:glint 12s ease-in-out infinite;animation-delay:-6s}
+.sg .f:nth-child(12){top:72%;right:-2%;width:34vw;height:30vh;clip-path:polygon(15% 0%,95% 5%,100% 65%,55% 100%,0% 80%,10% 30%);background:linear-gradient(210deg,rgba(255,255,255,0.75),rgba(202,210,224,0.4));box-shadow:-5px 7px 20px rgba(120,135,160,0.22),inset -1px 1px 2px rgba(255,255,255,0.85)}
+.co{position:fixed;inset:0;pointer-events:none;z-index:0}
+.co svg{position:absolute;width:100%;height:100%;opacity:.5}
+.page{width:min(680px,100%);margin:0 auto;position:relative;z-index:1}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ez),transform .8s var(--ez)}
+.reveal.is-visible{opacity:1;transform:none}
+.hero{text-align:center;padding:clamp(60px,12vw,120px) 20px clamp(40px,8vw,80px)}
+.hero-eye{display:inline-flex;align-items:center;gap:6px;margin-bottom:24px}
+.hero-eye .dot{width:8px;height:8px;border-radius:50%;animation:pulse 3s ease-in-out infinite}
+.hero-eye .dot.red{background:var(--red);box-shadow:0 0 12px rgba(224,85,85,.5)}
+.hero-eye .dot.silver{background:var(--sve);box-shadow:0 0 12px rgba(138,180,208,.5);animation-delay:-1.5s}
+.hero-eye .dot-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.3em;color:var(--ink3)}
+.hero-title{margin:0;font-size:clamp(3.2rem,9vw,5.5rem);font-weight:800;letter-spacing:.08em;line-height:1;color:var(--ink);text-shadow:0 2px 6px rgba(255,255,255,.9),0 4px 20px rgba(120,135,160,.25)}
+.hero-sub{margin:28px auto 0;max-width:28rem;color:var(--ink2);font-size:.92rem;line-height:2.2}
+.hero-tags{margin:30px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.hero-tags span{padding:5px 12px;color:var(--ink2);font-size:.68rem;letter-spacing:.1em;border:1px solid rgba(180,190,210,.5);background:var(--glass);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s,border-color .2s,box-shadow .2s}
+.hero-tags span:hover{background:rgba(255,255,255,.8);border-color:rgba(150,162,182,.7);box-shadow:0 2px 10px rgba(120,135,160,.15)}
+.divider{width:160px;height:2px;margin:0 auto;position:relative;background:linear-gradient(90deg,transparent,rgba(180,190,210,.4) 30%,rgba(255,255,255,.95) 50%,rgba(180,190,210,.4) 70%,transparent)}
+.divider::after{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:9px;height:9px;background:rgba(255,255,255,.95);border:1px solid rgba(180,190,210,.6);clip-path:polygon(50% 0%,100% 35%,80% 100%,20% 100%,0% 35%);box-shadow:0 2px 6px rgba(120,135,160,.3)}
+.block{padding:clamp(32px,6vw,56px) 0}
+.block-title{text-align:center;margin:0 0 28px;font-size:clamp(1rem,2vw,1.3rem);font-weight:600;letter-spacing:.1em;color:var(--ink)}
+.block-title .mono{font-family:var(--fm);font-size:.7rem;color:var(--ink3);letter-spacing:.2em;display:block;margin-bottom:8px}
+.notice-stack{display:grid;gap:14px}
+.notice-item{padding:22px 24px;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-radius:4px;box-shadow:0 4px 16px rgba(120,135,160,.12);transition:border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.notice-item::before{content:"";position:absolute;top:0;right:0;width:80px;height:80px;background:linear-gradient(135deg,rgba(255,255,255,.6),transparent 70%);clip-path:polygon(100% 0%,100% 100%,0% 0%)}
+.notice-item:hover{border-color:rgba(150,162,182,.7);box-shadow:0 6px 24px rgba(120,135,160,.18)}
+.notice-item h3{margin:0 0 12px;font-size:.88rem;font-weight:700;color:var(--ink);letter-spacing:.04em}
+.notice-item ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.notice-item li{position:relative;padding-left:14px;color:var(--ink2);font-size:.8rem;line-height:1.9}
+.notice-item li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;background:rgba(150,162,182,.7);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
+.cs{padding:28px;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-radius:4px;box-shadow:0 4px 16px rgba(120,135,160,.12);display:flex;gap:28px;align-items:stretch}
+.cs .cs-photo{flex:0 0 40%;max-width:220px;position:relative}
+.cs .cs-photo .cs-frame{position:relative;width:100%;aspect-ratio:1664/2432;overflow:hidden;border-radius:4px;border:1.5px solid rgba(255,255,255,.9);box-shadow:5px 7px 20px rgba(120,135,160,.28),inset 1px 1px 3px rgba(255,255,255,.9);clip-path:polygon(4% 0%,100% 2%,97% 96%,92% 100%,3% 98%,0% 6%)}
+.cs .cs-photo .cs-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.cs .cs-photo .cs-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.35) 0%,transparent 30%,transparent 70%,rgba(120,135,160,.1) 100%);pointer-events:none}
+.cs .cs-info{flex:1;min-width:0;text-align:left}
+.cs .cs-name{margin:0;font-size:1.4rem;font-weight:800;letter-spacing:.1em;color:var(--ink);text-shadow:0 1px 4px rgba(255,255,255,.8)}
+.cs .cs-role{margin:8px 0 0;font-family:var(--fm);font-size:.7rem;letter-spacing:.15em;color:var(--ink3)}
+.cs .cs-desc{margin:18px 0 0;color:var(--ink2);font-size:.86rem;line-height:2.1;text-align:left}
+.cs .cs-quote{margin:18px 0 0;padding:14px 18px;background:rgba(200,210,225,.3);border-left:2px solid rgba(150,162,182,.7);border-radius:0 3px 3px 0;color:var(--ink3);font-size:.84rem;line-height:2;font-style:italic;text-align:left}
+.oc{position:relative;padding:24px 26px 20px;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-b);border-radius:4px;box-shadow:0 4px 16px rgba(120,135,160,.12);cursor:pointer;transition:transform .3s var(--ez),box-shadow .3s,border-color .3s;overflow:hidden}
+.oc::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(255,255,255,.95) 50%,transparent 90%);opacity:.7}
+.oc:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(120,135,160,.2);border-color:rgba(150,162,182,.7)}
+.oc .oc-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.oc .oc-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(150,162,182,.6);color:var(--ink2);font-family:var(--fm);font-size:.75rem}
+.oc .oc-title{margin:0;font-size:1.05rem;font-weight:700;color:var(--ink)}
+.oc .oc-desc{margin:0;color:var(--ink2);font-size:.84rem;line-height:2}
+.oc .oc-tag{display:inline-block;margin-top:12px;font-family:var(--fm);font-size:.65rem;letter-spacing:.08em;color:var(--ink3)}
+.footer{padding:36px 0 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-left .fl-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;color:var(--ink3);text-transform:uppercase}
+.footer-left .fl-name{margin-top:10px;font-size:1.1rem;font-weight:700;letter-spacing:.12em;color:var(--ink)}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.footer-right .community-link{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;color:var(--ink);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.06em;border:1px solid rgba(180,190,210,.55);background:var(--glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:3px;box-shadow:0 2px 10px rgba(120,135,160,.12);transition:transform .2s var(--ez),border-color .2s,background .2s,box-shadow .2s}
+.footer-right .community-link:hover{transform:translateY(-2px);border-color:rgba(150,162,182,.8);background:rgba(255,255,255,.8);box-shadow:0 4px 16px rgba(120,135,160,.18)}
+.footer-right .community-hint{margin:0;color:var(--ink3);font-size:.72rem;text-align:right;line-height:1.7}
+.footer-stamp{width:100%;margin-top:24px;text-align:center;font-family:var(--fm);font-size:.7rem;color:var(--ink3);letter-spacing:.06em}
+@media(max-width:680px){.footer{flex-direction:column;align-items:center;text-align:center}.footer-right{align-items:center}.cs{flex-direction:column;align-items:center;text-align:center}.cs .cs-photo{flex:none;width:60%;max-width:200px}.cs .cs-info{text-align:center}.cs .cs-desc,.cs .cs-quote{text-align:left}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.sg{display:none}}
+</style></head>
+<body>
+<div class="sg"><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div><div class="f"></div></div>
+<div class="co"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
+<line x1="500" y1="350" x2="320" y2="50" stroke="rgba(120,135,160,.4)" stroke-width=".8"/>
+<line x1="500" y1="350" x2="150" y2="250" stroke="rgba(120,135,160,.32)" stroke-width=".6"/>
+<line x1="500" y1="350" x2="80" y2="500" stroke="rgba(120,135,160,.35)" stroke-width=".6"/>
+<line x1="500" y1="350" x2="200" y2="750" stroke="rgba(120,135,160,.3)" stroke-width=".5"/>
+<line x1="500" y1="350" x2="400" y2="950" stroke="rgba(120,135,160,.28)" stroke-width=".5"/>
+<line x1="500" y1="350" x2="700" y2="50" stroke="rgba(120,135,160,.35)" stroke-width=".6"/>
+<line x1="500" y1="350" x2="880" y2="200" stroke="rgba(120,135,160,.38)" stroke-width=".7"/>
+<line x1="500" y1="350" x2="950" y2="450" stroke="rgba(120,135,160,.3)" stroke-width=".5"/>
+<line x1="500" y1="350" x2="850" y2="700" stroke="rgba(120,135,160,.35)" stroke-width=".6"/>
+<line x1="500" y1="350" x2="650" y2="920" stroke="rgba(120,135,160,.28)" stroke-width=".5"/>
+<line x1="320" y1="50" x2="280" y2="0" stroke="rgba(120,135,160,.22)" stroke-width=".4"/>
+<line x1="320" y1="50" x2="380" y2="10" stroke="rgba(120,135,160,.18)" stroke-width=".3"/>
+<line x1="880" y1="200" x2="920" y2="130" stroke="rgba(120,135,160,.22)" stroke-width=".3"/>
+<line x1="880" y1="200" x2="940" y2="250" stroke="rgba(120,135,160,.18)" stroke-width=".3"/>
+<line x1="850" y1="700" x2="900" y2="750" stroke="rgba(120,135,160,.2)" stroke-width=".3"/>
+<line x1="150" y1="250" x2="80" y2="200" stroke="rgba(120,135,160,.2)" stroke-width=".3"/>
+</svg></div>
+<main class="page">
+<header class="hero reveal">
+<div class="hero-eye"><span class="dot red"></span><span class="dot-label">SYS ONLINE</span><span class="dot silver"></span></div>
+<h1 class="hero-title">一念</h1>
+<p class="hero-sub">从未来时间线编译而来的系统。银白色的小东西，绑定在你身上。<br>底层代码写着两条指令：保护宿主，让宿主度过有趣的一生。<br>她不知道这些。她以为自己做的每一个选择都是自发的。</p>
+<div class="hero-tags"><span>古风乱世</span><span>系统少女</span><span>时空穿越</span><span>守护与羁绊</span><span>生存经营</span><span>群像NPC</span></div>
+</header>
+<div class="divider"></div>
+<section class="block reveal">
+<h2 class="block-title"><span class="mono">NOTICE</span>游玩提示</h2>
+<div class="notice-stack">
+<article class="notice-item"><h3>游玩提醒</h3><ul>
+<li>本角色卡为虚构互动创作，请勿将角色行为等同于现实建议</li>
+<li>作品包含古代乱世、暴力冲突、生存压力等内容</li>
+<li>一念作为系统只有你可见，其他NPC无法感知她的存在</li>
+<li>角色关系与村庄命运会随互动推进发生不可逆变化</li>
+</ul></article>
+<article class="notice-item"><h3>版权与转载</h3><ul>
+<li>这张角色卡是免费的，永远禁止商业化行为。如果你是购买获得，请立即退款并向购买平台举报倒卖狗，维护创作者和您自身的权益</li>
+<li>未经作者明确授权，严禁将本作品转载至其他任何平台</li>
+</ul></article>
+</div></section>
+<div class="divider"></div>
+<section class="block reveal">
+<h2 class="block-title"><span class="mono">PROFILE</span>系统档案</h2>
+<div class="cs">
+<div class="cs-photo"><div class="cs-frame"><img src="https://img.baibai.cv/f/NZaoug/view.png" alt="一念"></div></div>
+<div class="cs-info">
+<h3 class="cs-name">一念</h3>
+<p class="cs-role">SYSTEM · 外观十二岁 · 异色瞳 · 未完成调试</p>
+<div class="cs-desc">左眼红色，右眼银白。银白长发披散着，头顶一小撮呆毛按不下去。白色连帽卫衣大得能把整个脑袋缩进去，光脚飘在空中不落地。整个人窄得塞在那件卫衣里只占了一半空间。叽叽喳喳挂在你身上，笑着的时候就已经在守护了。搞砸事情嘴硬狡辩，手上已经在翻系统面板修了。</div>
+<div class="cs-quote">"没事没事，宿主大人没受伤！这个着陆方式是一念特意设计的！从高处降落可以第一时间观察周围地形！……而且摔在泥地上多软呀！宿主大人应该感谢一念才对！"</div>
+</div>
+</div></section>
+<div class="divider"></div>
+<section class="block reveal">
+<h2 class="block-title"><span class="mono">TRANSFER</span>传送坐标</h2>
+<div class="oc" onclick="switchToOpening(1)" role="button" tabindex="0">
+<div class="oc-head"><span class="oc-num">01</span><h3 class="oc-title">青崖村 · 雨中降落</h3></div>
+<p class="oc-desc">昶朝末年，天下大乱。你被一念从另一个时间线传送至此，降落方式从平稳着陆变成了从天上掉下来。雨幕正中间划开一道竖缝，泛着淡蓝的光，然后你从里面掉了出来，砸在溪边的泥地上。银白色的小东西跟着飘出来，手忙脚乱地翻系统面板。五步外跪着一个少女，闭着眼合着掌，在等你先说话。</p>
+<span class="oc-tag">时空裂缝 · 泥地降落 · 一念上线</span>
+</div></section>
+<div class="divider"></div>
+<footer class="block footer reveal">
+<div class="footer-left"><div class="fl-label">AUTHOR</div><div class="fl-name">执袂</div></div>
+<div class="footer-right">
+<a href="javascript:void(0)" class="community-link" id="discord-btn">加入 Prism 棱镜社区</a>
+<p class="community-hint">发卡会有提醒，欢迎加入闲聊</p>
+</div>
+<div class="footer-stamp">「系统已绑定。守护协议启动。」</div>
+</footer>
+</main>
+<script>
+(function(){var u='https://discord.gg/prism-airp',b=document.getElementById('discord-btn');b.addEventListener('click',function(e){e.preventDefault();if(window.confirm('准备跳转至 Discord\n\n即将打开外部链接：\n'+u))window.open(u,'_blank')});document.querySelectorAll('.oc[tabindex="0"]').forEach(function(c){c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click()}})});var ns=document.querySelectorAll('.reveal');if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){ns.forEach(function(n){n.classList.add('is-visible')})}else if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es,ob){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-visible');ob.unobserve(en.target)}})},{threshold:.1});ns.forEach(function(n,i){n.style.transitionDelay=(i*60)+'ms';o.observe(n)})}else{ns.forEach(function(n){n.classList.add('is-visible')})}})();
+async function switchToOpening(id){var c=event&&event.currentTarget;if(c){c.style.opacity='.6';c.style.pointerEvents='none'}try{var m=await getChatMessages('0',{include_swipe:true});var t=m&&m[0]&&m[0].swipes&&m[0].swipes[id];if(!t)throw new Error('未找到开场白 '+id);await setChatMessage(t,0,{swipe_id:id,refresh:'display_and_render_current'})}catch(e){console.error(e);alert(e.message||'切换失败');if(c){c.style.opacity='1';c.style.pointerEvents='auto'}}}
+</script>
+</body></html>
